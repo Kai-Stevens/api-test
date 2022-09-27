@@ -14,7 +14,8 @@ const fetchZelda = async (beastIndex) => {
     }
 }
 
-zeldaData = fetchZelda();
+//const zeldaData = fetchZelda();
+module.exports = fetchZelda;
 
 /* Example data:
 {
