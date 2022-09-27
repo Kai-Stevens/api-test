@@ -27,8 +27,35 @@ app.get("/", (req, res) => {
     res.send("Welcome to the Zelda compendium");
 });
 
+// Grab the total collection of games
 app.get("/games", (req, res) => {
     zeldaDataProm.then(data => res.send(data)); // This is how you send the async promise data
+});
+
+// Grab just object where it matches the ID
+app.get("/games/:id", (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+
+        zeldaDataProm.then(data => {
+            const filtered = data.filter(zg => zg.id == req.params.id);
+            res.send(filtered[0])
+        });
+    } catch(e) {
+        res.status(404).send({error: e});
+    }
+});
+
+app.post("/games", (req, res) => {
+
+    zeldaDataProm.then(data => {
+        const newGame = req.body;
+        newGame["id"] = data.length;
+        data.push(newGame);
+        res.status(201).send(newGame);
+    })
+    // return a message saying it worked (if it hangs it's probably because you missed this part)
+    // generic code is 200
 });
 
 module.exports = app;
