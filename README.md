@@ -1,6 +1,6 @@
 # API Back-end Test App
 
-This app provides runescape weapon related services
+This app provides zelda weapon related services
 
 ## Installation
 
